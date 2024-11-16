@@ -1,0 +1,70 @@
+#!/usr/bin/env python3
+
+import sys
+import os
+
+# Добавьте путь к проекту
+sys.path.append("/home/fedobyte/vscodium/Voidkey")
+
+from password_generator import generate_password
+from file_encryption import encrypt_file, decrypt_file, encrypt_folder, decrypt_folder
+from security_analyzer import analyze_system
+
+import argparse
+from rich.console import Console
+
+console = Console()
+
+def main():
+    parser = argparse.ArgumentParser(
+        description="VoidKey: Your ultimate security tool"
+    )
+    subparsers = parser.add_subparsers(dest="command")
+
+    # Генерация паролей
+    password_parser = subparsers.add_parser("password", help="Generate secure passwords")
+    password_parser.add_argument("-l", "--length", type=int, default=12, help="Password length")
+    password_parser.add_argument("-s", "--save", action="store_true", help="Save the password to a file")
+
+    # Шифрование файлов
+    encrypt_parser = subparsers.add_parser("encrypt", help="Encrypt a file")
+    encrypt_parser.add_argument("file", help="Path to the file to encrypt")
+    encrypt_parser.add_argument("-p", "--password", help="Password for encryption")
+
+    # Дешифрование файлов
+    decrypt_parser = subparsers.add_parser("decrypt", help="Decrypt a file")
+    decrypt_parser.add_argument("file", help="Path to the file to decrypt")
+    decrypt_parser.add_argument("-p", "--password", help="Password for decryption")
+
+    # Шифрование папок
+    encrypt_folder_parser = subparsers.add_parser("encrypt-folder", help="Encrypt a folder")
+    encrypt_folder_parser.add_argument("folder", help="Path to the folder to encrypt")
+    encrypt_folder_parser.add_argument("-p", "--password", help="Password for encryption")
+
+    # Дешифрование папок
+    decrypt_folder_parser = subparsers.add_parser("decrypt-folder", help="Decrypt a folder")
+    decrypt_folder_parser.add_argument("folder", help="Path to the folder to decrypt")
+    decrypt_folder_parser.add_argument("-p", "--password", help="Password for decryption")
+
+    # Анализ безопасности
+    subparsers.add_parser("analyze", help="Analyze system security")
+
+    args = parser.parse_args()
+
+    if args.command == "password":
+        generate_password(args.length, args.save)
+    elif args.command == "encrypt":
+        encrypt_file(args.file, args.password)
+    elif args.command == "decrypt":
+        decrypt_file(args.file, args.password)
+    elif args.command == "encrypt-folder":
+        encrypt_folder(args.folder, args.password)
+    elif args.command == "decrypt-folder":
+        decrypt_folder(args.folder, args.password)
+    elif args.command == "analyze":
+        analyze_system()
+    else:
+        console.print("[bold red]Invalid command.[/bold red] Use 'password', 'encrypt', 'decrypt', 'encrypt-folder', 'decrypt-folder', or 'analyze'.")
+
+if __name__ == "__main__":
+    main()
