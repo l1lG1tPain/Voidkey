@@ -1,16 +1,5 @@
-<<<<<<< HEAD
-<<<<<<< HEAD
 # Voidkey
-Unlock the void, secure your world.
-=======
-=======
-=======
-<<<<<<< HEAD
-# Voidkey
-Unlock the void, secure your world.
-=======
->>>>>>> afb5cfa (Save work before pulling)
->>>>>>> 7412e38 (Save work before pulling)
+
 # VoidKey: Ultimate Security Tool
 
 VoidKey — это инструмент для обеспечения безопасности в Linux, предоставляющий возможности генерации паролей, шифрования файлов и анализа системы.
