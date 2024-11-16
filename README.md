@@ -37,3 +37,9 @@ sudo voidkey analyze
 
 VoidKey можно установить через pip или как системный скрипт.
 
+# Установка через терминал
+
+```bash
+pip install voidkey
+```
+
